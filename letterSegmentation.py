@@ -1,4 +1,5 @@
-from cv import *
+
+from cv2.cv import *
 
 
 def findContours(img):
@@ -64,7 +65,7 @@ def loadLetterExamples():
 
 
 
-src = LoadImage("test.png") 
+src = LoadImage("t2.png") 
 thresholded = getThresholdedImage(src)
 contours = findContours(thresholded)
 rois = mapSequence(contours, getROI)
@@ -74,8 +75,10 @@ letterSuggestions = map(recogniseLetterConstructor(thresholded, letterExamples),
 
 for i, (roi, letter, p) in enumerate(letterSuggestions):
     SetImageROI(src, roi)
-    SaveImage("out/%s-%f.png"%(letter, p), src)
+    #SaveImage("out/%s-%f.png"%(letter, p), src)
+    SaveImage("output/%s-%f.png"%(letter, p), src)
 
+print 'end'
 
 #letters = filter(lambda (roi, letter, p): p > 0.95, letterSuggestions)
 
